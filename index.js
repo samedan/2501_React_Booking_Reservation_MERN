@@ -26,6 +26,9 @@ mongoose.connection.on("connected", () => {
   console.log("mongo Connected");
 });
 
+// Middleware JSON
+app.use(express.json());
+
 // Routes Middleware
 // @ http://localhost:8800/auth
 app.use("/api/auth", authRoute);
