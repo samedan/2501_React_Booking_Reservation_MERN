@@ -19,3 +19,23 @@
 ## Create Error model
 
 > /utils/error.js -> createError = (status, message)
+
+### Login
+
+# Use Cookie-Parser and JWToken
+
+> /controllers/authController.js -> login()
+
+```
+const token = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET
+    );
+    const { password, isAdmin, ...otherDetails } = user._doc;
+    res
+      .cookie("acces_token", token, {
+        httpOnly: true, // no client secret will reach this cookie
+      })
+      .status(200)
+      .json({ ...otherDetails });
+```

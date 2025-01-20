@@ -1,4 +1,5 @@
 import Hotel from "../models/Hotel.js";
+import { createError } from "../utils/error.js";
 
 // CREATE POST @localhost/api/hotels
 export const createHotel = async (req, res, next) => {
@@ -57,7 +58,7 @@ export const deleteHotel = async (req, res, next) => {
       await hotel.findByIdAndDelete(req.params.id);
       res.status(200).json("Hotel has been deleted");
     } else {
-      res.status(401).json("no hotel found");
+      return next(createError(404, "no hotel found"));
     }
   } catch (err) {
     next(err);
