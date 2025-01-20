@@ -16,4 +16,6 @@
 
 ### Models, Routes
 
->
+## Create Error model
+
+> /utils/error.js -> createError = (status, message)
