@@ -1,0 +1,20 @@
+{
+  "name": "2501_react_booking_reservation_mern",
+  "version": "1.0.0",
+  "description": "> https://www.youtube.com/watch?v=RkWpJ4XUHuw&t=679s",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5",
+    "nodemon": "^3.1.9"
+  }
+}
