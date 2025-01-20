@@ -6,4 +6,4 @@
 
 > https://github.com/samedan/2501_React_Booking_Reservation_MERN
 
-> ![React](https://github.com/samedan/2501_React_Booking_Reservation_MERN/blob/main/__images/01printscreen.jpg)
+> ![React](https://github.com/samedan/2501_React_Booking_Reservation_MERN/blob/main/_images/01printscreen.jpg)
