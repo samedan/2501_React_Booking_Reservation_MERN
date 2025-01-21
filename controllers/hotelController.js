@@ -40,12 +40,32 @@ export const getHotels = async (req, res, next) => {
   }
 };
 
-// GET One Hotel GET @localhost/api/hotels/:i
+// GET One Hotel GET @localhost/api/hotels/find/:i
 export const getHotel = async (req, res, next) => {
   try {
     const hotel = await Hotel.findById(req.params.id);
     res.status(200).json(hotel);
   } catch (err) {
+    next(err);
+  }
+};
+
+// GET Count Hotels By CITY GET @localhost/api/hotels/countByCity?cities=berlin,london,paris
+export const countByCity = async (req, res, next) => {
+  // create ["city1","city2"] from ?cities=city1,city2
+  console.log(req.query.cities);
+  const cities = req.query.cities.split(",");
+  try {
+    const list = await Promise.all(
+      cities.map((city) => {
+        console.log(city.toLowerCase());
+        // countDocuments comes from mongoDb
+        return Hotel.countDocuments({ city: city });
+      })
+    );
+    res.status(200).json(list);
+  } catch (err) {
+    // res.status(500).json(err);
     next(err);
   }
 };
