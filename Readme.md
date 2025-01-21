@@ -69,6 +69,23 @@ const hotels = await Hotel.find({
 
 > Header.jsx -> const { dispatch } = useContext(SearchContext);
 
+# Compute Price in Hotel.jsx
+
+> /src/pages/hotel/Hotel.jsx -> const { dates, options } = useContext(SearchContext);
+
+# Calculate nr of Nights (days) of stay - Hotel.jsx
+
+```
+const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  function dayDifference(date1, date2) {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return diffDays;
+  }
+```
+
+> ![Nr of nights](https://github.com/samedan/2501_React_Booking_Reservation_MERN/blob/main/_images/02printscreen.jpg)
+
 ### TO DO
 
 > count by city lowercase -> hotelController.js
