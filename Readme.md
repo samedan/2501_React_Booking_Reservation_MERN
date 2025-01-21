@@ -59,6 +59,16 @@ const hotels = await Hotel.find({
     }).limit(limit);
 ```
 
+### Created Search CONTEXT
+
+> /src/context/SearchContext.jsx
+
+> index.js -> <SearchContextProvider><App /></SearchContextProvider>
+
+# Use context data in components
+
+> Header.jsx -> const { dispatch } = useContext(SearchContext);
+
 ### TO DO
 
 > count by city lowercase -> hotelController.js
