@@ -48,6 +48,17 @@ const token = jwt.sign(
 
 > /utils/verifyToken.js -> verifyToken, verifyUser, verifyAdmin
 
+### Backend Get featured search on Hotels
+
+> hotelController.js -> const { min, max, limit, ...others } = req.query;
+
+```
+const hotels = await Hotel.find({
+      ...others,
+      cheapestPrice: { $gt: min | 1, $lt: max || 999 },
+    }).limit(limit);
+```
+
 ### TO DO
 
 > count by city lowercase -> hotelController.js

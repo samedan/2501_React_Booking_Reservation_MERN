@@ -31,8 +31,13 @@ export const updateHotel = async (req, res, next) => {
 
 // GET ALL Hotels GET @localhost/api/hotels
 export const getHotels = async (req, res, next) => {
+  const { min, max, limit, ...others } = req.query;
   try {
-    const hotels = await Hotel.find();
+    // http://localhost:8800/api/hotels?featured=true&limit=4&min=10&max=300
+    const hotels = await Hotel.find({
+      ...others,
+      cheapestPrice: { $gt: min | 1, $lt: max || 999 },
+    }).limit(limit);
     res.status(200).json(hotels);
   } catch (err) {
     // res.status(500).json(err);
