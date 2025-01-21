@@ -8,17 +8,18 @@ import {
   getHotels,
   updateHotel,
 } from "../controllers/hotelController.js";
+import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
 // CREATE POST @localhost/api/hotels
-router.post("/", createHotel);
+router.post("/", verifyAdmin, createHotel);
 
 // UPDATE PUT @localhost/api/hotels/:id
-router.put("/:id", updateHotel);
+router.put("/:id", verifyAdmin, updateHotel);
 
 // DELETE @localhost/api/hotels/:id
-router.delete("/:id", deleteHotel);
+router.delete("/:id", verifyAdmin, deleteHotel);
 
 // GET One Hotel GET @localhost/api/hotels/:id
 router.get("/:id", getHotel);

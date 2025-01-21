@@ -1,15 +1,28 @@
 import express from "express";
+import {
+  createRoom,
+  deleteRoom,
+  getRooms,
+  getRoom,
+  updateRoom,
+} from "../controllers/roomController.js";
+import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
-// @localhost/auth
-router.get("/api", (req, res) => {
-  res.send("Hello, auth route");
-});
+// CREATE POST @localhost/api/rooms/:hotelId
+router.post("/:hotelId", verifyAdmin, createRoom);
 
-// @localhost/auth/register
-router.get("/api/register", (req, res) => {
-  res.send("register route");
-});
+// UPDATE PUT @localhost/api/rooms/:id
+router.put("/:id", verifyAdmin, updateRoom);
+
+// DELETE @localhost/api/rooms/:roomId/:hotelId
+router.delete("/:roomId/:hotelId", verifyAdmin, deleteRoom);
+
+// GET One Room GET @localhost/api/rooms/:id
+router.get("/:id", getRoom);
+
+// GET ALL Rooms GET @localhost/api/rooms/
+router.get("/", getRooms);
 
 export default router;
