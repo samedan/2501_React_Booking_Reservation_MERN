@@ -47,3 +47,7 @@ const token = jwt.sign(
 ### Check Token, Admin, User
 
 > /utils/verifyToken.js -> verifyToken, verifyUser, verifyAdmin
+
+### TO DO
+
+> count by city lowercase -> hotelController.js

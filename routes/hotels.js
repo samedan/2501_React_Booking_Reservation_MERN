@@ -3,6 +3,7 @@ import Hotel from "../models/Hotel.js";
 import { createError } from "../utils/error.js";
 import {
   countByCity,
+  countByType,
   createHotel,
   deleteHotel,
   getHotel,
@@ -13,8 +14,8 @@ import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
-// GET ALL Hotels GET @localhost/api/hotels/
-router.get("/countByType", getHotels);
+// GET ALL Hotels GET @localhost/api/hotels/countByType
+router.get("/countByType", countByType);
 
 // GET Hotels CountByCityName @localhost/api/hotels/countByCity?cities=berlin,london,paris
 router.get("/countByCity", countByCity);
