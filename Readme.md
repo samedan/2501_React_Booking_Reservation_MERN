@@ -39,3 +39,7 @@ const token = jwt.sign(
       .status(200)
       .json({ ...otherDetails });
 ```
+
+### Check Token, Admin, User
+
+> /utils/verifyToken.js -> verifyToken, verifyUser, verifyAdmin
