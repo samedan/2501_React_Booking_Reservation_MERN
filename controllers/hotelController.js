@@ -1,4 +1,5 @@
 import Hotel from "../models/Hotel.js";
+import Room from "../models/Room.js";
 import { createError } from "../utils/error.js";
 
 // CREATE POST @localhost/api/hotels
@@ -106,6 +107,22 @@ export const deleteHotel = async (req, res, next) => {
     } else {
       return next(createError(404, "no hotel found"));
     }
+  } catch (err) {
+    next(err);
+  }
+};
+
+// GET Room/Hotel Details in Modal GET @localhost/api/hotels/room/:hotelId
+export const getHotelRooms = async (req, res, next) => {
+  try {
+    const hotel = await Hotel.findById(req.params.hotelId);
+    const list = await Promise.all(
+      hotel.rooms.map((room) => {
+        return Room.findById(room);
+      })
+    );
+    console.log(list);
+    res.status(200).json(list);
   } catch (err) {
     next(err);
   }

@@ -116,6 +116,10 @@ const INITIAL_STATE = {
 
 > /src/pages/hotel/Hotel.jsx
 
+### Get Available Rooms
+
+> /ReserveModal.jsx -> setSelectedRooms()
+
 ### TO DO
 
 > count by city lowercase -> hotelController.js

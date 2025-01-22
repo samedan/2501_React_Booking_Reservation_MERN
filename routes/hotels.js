@@ -9,6 +9,7 @@ import {
   getHotel,
   getHotels,
   updateHotel,
+  getHotelRooms,
 } from "../controllers/hotelController.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
 
@@ -34,5 +35,8 @@ router.delete("/:id", verifyAdmin, deleteHotel);
 
 // GET One Hotel GET @localhost/api/hotels/find/:id
 router.get("/find/:id", getHotel);
+
+// GET Room/Hotel Details in Modal GET @localhost/api/hotels/room/:hotelId
+router.get("/room/:hotelId", getHotelRooms);
 
 export default router;
