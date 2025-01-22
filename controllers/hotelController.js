@@ -121,7 +121,6 @@ export const getHotelRooms = async (req, res, next) => {
         return Room.findById(room);
       })
     );
-    console.log(list);
     res.status(200).json(list);
   } catch (err) {
     next(err);

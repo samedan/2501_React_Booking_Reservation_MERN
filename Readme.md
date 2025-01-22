@@ -120,6 +120,21 @@ const INITIAL_STATE = {
 
 > /ReserveModal.jsx -> setSelectedRooms()
 
+### Reserve a certain room number
+
+> roomController.js -> updateRoomAvailability()
+
+```
+const updatedRoom = await Room.updateOne(
+      { "roomNumbers._id": req.params.roomId },
+      {
+        $push: {
+          "roomNumbers.$.unavailableDates": req.body.dates,
+        },
+      }
+      );
+```
+
 ### TO DO
 
 > count by city lowercase -> hotelController.js

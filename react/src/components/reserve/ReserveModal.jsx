@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "./../../hooks/useFetch";
 import { SearchContext } from "./../../context/SearchContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function ReserveModal({ setOpenModal, hotelId }) {
+  const navigate = useNavigate();
   const [selectedRooms, setSelectedRooms] = useState([]);
 
   const { data, loading, error } = useFetch(`room/${hotelId}`);
@@ -28,7 +31,14 @@ function ReserveModal({ setOpenModal, hotelId }) {
     return list;
   };
 
-  console.log(getDatesInRange(dates[0].startDate, dates[0].endDate));
+  const allDates = getDatesInRange(dates[0].startDate, dates[0].endDate);
+
+  const isAvailable = (roomNumber) => {
+    const isFound = roomNumber.unavailableDates.some((date) =>
+      allDates.includes(new Date(date).getTime())
+    );
+    return !isFound;
+  };
 
   const handleSelect = (e) => {
     const checked = e.target.checked;
@@ -43,7 +53,21 @@ function ReserveModal({ setOpenModal, hotelId }) {
   console.log("selectedRooms");
   console.log(selectedRooms);
 
-  const handleClick = () => {};
+  const handleClick = async () => {
+    try {
+      await Promise.all(
+        selectedRooms.map((roomNumberId) => {
+          console.log(roomNumberId);
+          const res = axios.put(`/rooms/availability/${roomNumberId}`, {
+            dates: allDates,
+          });
+          return res.data;
+        })
+      );
+      setOpenModal(false);
+      navigate("/");
+    } catch (err) {}
+  };
 
   return (
     <div className="reserve">
@@ -68,15 +92,15 @@ function ReserveModal({ setOpenModal, hotelId }) {
                 </div>
 
                 <div className="rSelectRooms">
-                  {JSON.stringify(item)}
+                  {/* {JSON.stringify(item)} */}
                   {item.roomNumbers.map((roomNumber) => (
                     <div className="room">
                       <label>{roomNumber.number}</label>
                       <input
                         type="checkbox"
-                        style={{ border: "1px solid #000" }}
                         value={roomNumber._id}
                         onChange={handleSelect}
+                        disabled={!isAvailable(roomNumber)}
                       />
                     </div>
                   ))}

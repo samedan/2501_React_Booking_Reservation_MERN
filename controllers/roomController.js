@@ -38,6 +38,26 @@ export const updateRoom = async (req, res, next) => {
   }
 };
 
+// UPDATE AVAILABLE ROOM PUT @localhost/api/rooms/availability/:roomId
+export const updateRoomAvailability = async (req, res, next) => {
+  console.log(req.body.dates);
+  console.log(req.params.roomId);
+
+  try {
+    const updatedRoom = await Room.updateOne(
+      { "roomNumbers._id": req.params.roomId },
+      {
+        $push: {
+          "roomNumbers.$.unavailableDates": req.body.dates,
+        },
+      }
+    );
+    res.status(200).json(updatedRoom);
+  } catch (err) {
+    next(err);
+  }
+};
+
 // GET ALL Rooms GET @localhost/api/rooms
 export const getRooms = async (req, res, next) => {
   try {
