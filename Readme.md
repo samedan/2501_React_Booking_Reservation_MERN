@@ -108,6 +108,14 @@ const INITIAL_STATE = {
 
 > const { user } = useContext(AuthContext);
 
+### MODAL : Pass hotel details
+
+> /src/components/reserve/ReserveModal.jsx
+
+# Show Modal
+
+> /src/pages/hotel/Hotel.jsx
+
 ### TO DO
 
 > count by city lowercase -> hotelController.js
