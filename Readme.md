@@ -139,6 +139,10 @@ const updatedRoom = await Room.updateOne(
       );
 ```
 
+### ADMIN
+
+> ![Admin](https://github.com/samedan/2501_React_Booking_Reservation_MERN/blob/main/_images/03printscreen.jpg)
+
 ### TO DO
 
 > count by city lowercase -> hotelController.js

@@ -1,11 +1,10 @@
 import axios from "axios";
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-// import { AuthContext } from "../../context/AuthContext";
 import "./login.scss";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+function Login() {
   const [credentials, setCredentials] = useState({
     username: undefined,
     password: undefined,
@@ -19,21 +18,15 @@ const Login = () => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  const handleClick = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
+
     try {
       const res = await axios.post("/auth/login", credentials);
-      if (res.data.isAdmin) {
-        dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
 
-        navigate("/");
-      } else {
-        dispatch({
-          type: "LOGIN_FAILURE",
-          payload: { message: "You are not allowed!" },
-        });
-      }
+      navigate("/");
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
@@ -56,13 +49,14 @@ const Login = () => {
           onChange={handleChange}
           className="lInput"
         />
-        <button disabled={loading} onClick={handleClick} className="lButton">
+        <button disabled={loading} onClick={handleLogin} className="lButton">
           Login
         </button>
         {error && <span>{error.message}</span>}
       </div>
+      Login
     </div>
   );
-};
+}
 
 export default Login;
