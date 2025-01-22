@@ -12,6 +12,10 @@
 
 > https://github.com/samedan/2501_React_Booking_Reservation_MERN
 
+### Original Git
+
+> https://github.com/safak/youtube2022/tree/mern-booking/
+
 ### Backend URL in frontend
 
 > /react/package.json -> "proxy": "http://localhost:8800/api"
