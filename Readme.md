@@ -1,6 +1,12 @@
 ### Source Lama dev
 
+# Frontend
+
 > https://www.youtube.com/watch?v=RkWpJ4XUHuw&t=679s
+
+# Backend
+
+> https://www.youtube.com/watch?v=k3Vfj-e1Ma4&t=8053s
 
 ### This git :
 
@@ -85,6 +91,22 @@ const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 ```
 
 > ![Nr of nights](https://github.com/samedan/2501_React_Booking_Reservation_MERN/blob/main/_images/02printscreen.jpg)
+
+### AuthContext
+
+> /src/context/AuthContext.jsx -> user is saved in localStorage
+
+```
+const INITIAL_STATE = {
+  user: JSON.parse(localStorage.getItem("user")),
+  loading: false,
+  error: null,
+};
+```
+
+# Auth in Login, Header & Navbar
+
+> const { user } = useContext(AuthContext);
 
 ### TO DO
 
