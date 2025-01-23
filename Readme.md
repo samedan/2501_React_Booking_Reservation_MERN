@@ -69,6 +69,14 @@ const hotels = await Hotel.find({
     }).limit(limit);
 ```
 
+### Use same TABLE for Users, Hotels, Rooms
+
+> /admin/src/components/datatable/Datatable.jsx
+
+# TABLE Rows Names comse from datatablesource.js
+
+> /admin/src/datatablesource.js -> userColumns, hotemColumns, roomColumns
+
 ### Created Search CONTEXT
 
 > /src/context/SearchContext.jsx
