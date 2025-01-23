@@ -3,9 +3,28 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
+import axios from "axios";
 
 const NewUser = ({ inputs, title }) => {
   const [file, setFile] = useState("");
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "lamadev");
+    try {
+      console.log("cloudinary");
+
+      const uploadRes = await axios.post(
+        "http://api.cloudinary.com/v1_1/___/image/upload",
+        data
+      );
+      console.log(uploadRes.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="new">
@@ -46,7 +65,7 @@ const NewUser = ({ inputs, title }) => {
                   <input type={input.type} placeholder={input.placeholder} />
                 </div>
               ))}
-              <button>Send</button>
+              <button onClick={handleClick}>Send</button>
             </form>
           </div>
         </div>

@@ -3,6 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
+import axios from "axios";
 
 const NewHotel = ({ inputs, title }) => {
   const [file, setFile] = useState("");
@@ -13,8 +14,22 @@ const NewHotel = ({ inputs, title }) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  const handleClick = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "lamadev");
+    try {
+      console.log("cloudinary");
+
+      // const uploadRes = await axios.post(
+      //   "http://api.cloudinary.com/v1_1/lamadev/demo/image/upload",
+      //   data
+      // );
+      // console.log(uploadRes.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -50,7 +65,7 @@ const NewHotel = ({ inputs, title }) => {
                 />
               </div>
 
-              {inputs.map((input) => (
+              {/* {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
                   <label>{input.label}</label>
                   <input
@@ -59,8 +74,10 @@ const NewHotel = ({ inputs, title }) => {
                     placeholder={input.placeholder}
                   />
                 </div>
-              ))}
-              <button onClick={handleClick}>Send</button>
+              ))} */}
+              <button type="submit" onSubmit={handleSubmit}>
+                Send
+              </button>
             </form>
           </div>
         </div>
