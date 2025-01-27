@@ -7,7 +7,11 @@ import axios from "axios";
 
 const NewUser = ({ inputs, title }) => {
   const [file, setFile] = useState("");
+  const [info, setInfo] = useState({});
 
+  const handleChange = (e) => {
+    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
   const handleClick = async (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -17,10 +21,15 @@ const NewUser = ({ inputs, title }) => {
       console.log("cloudinary");
 
       const uploadRes = await axios.post(
-        "http://api.cloudinary.com/v1_1/___/image/upload",
+        "http://api.cloudinary.com/v1_1/dd8oumad8/image/upload",
         data
       );
-      console.log(uploadRes.data);
+      const { url } = uploadRes.data;
+      const newUser = {
+        ...info,
+        img: url,
+      };
+      axios.post("/auth/register", newUser);
     } catch (err) {
       console.log(err);
     }
@@ -62,7 +71,12 @@ const NewUser = ({ inputs, title }) => {
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
                   <label>{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} />
+                  <input
+                    type={input.type}
+                    placeholder={input.placeholder}
+                    onChange={handleChange}
+                    id={input.id}
+                  />
                 </div>
               ))}
               <button onClick={handleClick}>Send</button>

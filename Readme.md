@@ -155,6 +155,10 @@ const updatedRoom = await Room.updateOne(
 
 > /admin/src/App.js -> const ProtectedRoute = ({ children }) => {}
 
+### Upload image files
+
+# Promise.all() for multiple files API
+
 ### TO DO
 
 > count by city lowercase -> hotelController.js
